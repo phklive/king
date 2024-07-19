@@ -2,11 +2,10 @@ mod agent;
 mod constants;
 mod contract;
 mod game;
+mod summary;
 mod utils;
 
-use game::Game;
-
-use crate::agent::Strategy;
+use crate::{agent::Strategy, game::Game};
 
 fn main() {
     // Define agent strategies

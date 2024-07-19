@@ -10,6 +10,7 @@ use crate::{
     agent::{Agent, Strategy},
     constants::{ABI_PATH, BYTECODE_PATH},
     contract::Contract,
+    summary::Summary,
     utils::{deploy_contract, generate_agents, read_contract},
 };
 
@@ -18,6 +19,7 @@ pub struct Game {
     evm: Evm<'static, (), CacheDB<EmptyDBTyped<Infallible>>>,
     contract: Contract,
     agents: Vec<Agent>,
+    ended: bool,
 }
 
 impl Game {
@@ -45,7 +47,16 @@ impl Game {
             evm,
             contract,
             agents: agents.to_vec(),
+            ended: false,
         }
+    }
+
+    pub fn _play(&self) -> Summary {
+        // play the game, update ended when one agent has won the game
+        while !self.ended {}
+
+        // return summary of the game to frontend
+        Summary::new(self.agents[0], 10)
     }
 
     pub fn agents(&self) -> &[Agent] {
