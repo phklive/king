@@ -1,0 +1,10 @@
+[package]
+name = "king"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+revm = { version = "12.1.0", features = ["serde"] }
+serde_json = "1.0"
+ethabi = "18.0.0"
+rand = "0.8.5"
