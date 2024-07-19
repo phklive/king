@@ -1,5 +1,6 @@
 mod agent;
 mod constants;
+mod contract;
 mod game;
 mod utils;
 
@@ -35,19 +36,19 @@ fn main() {
     println!("Created agents: {:#?} and {:#?}", agent_0, agent_1);
 
     // check king before pay_in
-    let king = game.king(agent_0.address().clone()).unwrap();
+    let king = game.get_king(agent_0.address().clone()).unwrap();
 
     // pay_in
     let _ = game.pay_in(agent_0.address().clone()).unwrap();
 
     // king
-    let king_0 = game.king(agent_0.address().clone()).unwrap();
+    let king_0 = game.get_king(agent_0.address().clone()).unwrap();
 
     // change king by new payin
     let _ = game.pay_in(agent_1.address().clone()).unwrap();
 
     // new king
-    let king_1 = game.king(agent_1.address().clone()).unwrap();
+    let king_1 = game.get_king(agent_1.address().clone()).unwrap();
 
     println!(
         "These are the two kings that went on the throne: {}, {} and {}",
@@ -55,4 +56,17 @@ fn main() {
     );
 
     println!("Game state: {:#?}", game);
+
+    // test last_block
+    let last_block = game.get_last_block(agent_0.address().clone()).unwrap();
+
+    println!("Last block: {}", last_block);
+
+    // test pay_out
+    let pay_out = game.pay_out(agent_0.address().clone()).unwrap();
+    println!("payout: {:?}", pay_out);
+
+    // test won
+    let won = game.get_won(agent_0.address().clone()).unwrap();
+    println!("won: {}", won);
 }

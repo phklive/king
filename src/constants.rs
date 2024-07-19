@@ -9,4 +9,5 @@ pub const ABI_PATH: &str = "contract/abi.json";
 // CONVERSIONS
 // ================================================================================================
 
+pub const ETH_0: U256 = U256::ZERO;
 pub const ETH_1: U256 = U256::from_limbs([1000000000000000000, 0, 0, 0]);

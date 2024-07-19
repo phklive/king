@@ -125,14 +125,8 @@ pub fn call_contract(
 
     let result = evm.transact_commit()?;
     match result {
-        ExecutionResult::Success { output, .. } => {
-            println!("Call success");
-            Ok(output.into_data())
-        }
-        _ => {
-            println!("Call failed");
-            Err("Transaction failed".into())
-        }
+        ExecutionResult::Success { output, .. } => Ok(output.into_data()),
+        _ => Err("Transaction failed".into()),
     }
 }
 
@@ -156,9 +150,6 @@ pub fn generate_agents(
             agents.push(agent)
         }
     }
-    println!(
-        "Agents have been generated: {} agents created",
-        agents.len()
-    );
+
     agents
 }
