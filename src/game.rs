@@ -1,3 +1,4 @@
+use core::panic;
 use std::convert::Infallible;
 
 use ethabi::Contract;
@@ -9,8 +10,8 @@ use revm::{
 
 use crate::{
     agent::{Agent, Strategy},
+    constants::{ABI_PATH, BYTECODE_PATH, ETH_1},
     utils::{call_contract, deploy_contract, generate_agents, read_contract},
-    ABI_PATH, BYTECODE_PATH,
 };
 
 #[derive(Debug)]
@@ -29,6 +30,9 @@ impl Game {
         // Instantiate Evm
         let cache_db = CacheDB::new(EmptyDB::default());
         let mut evm = Evm::builder().with_db(cache_db).build();
+
+        println!("Evm clean: {:#?}", evm);
+        panic!("Stop for test");
 
         // Read contract
         let (bytecode, abi) = read_contract(BYTECODE_PATH, ABI_PATH).unwrap();
@@ -56,14 +60,13 @@ impl Game {
             .function("payIn")?
             .encode_input(&[])?
             .into();
-        let value = U256::from(100000000000000000u64); // 0.1 ether
 
         // call contract
         let _ = call_contract(
             &mut self.evm,
             self.contract_address,
             caller,
-            value,
+            ETH_1,
             Some(data),
         );
 
@@ -78,12 +81,11 @@ impl Game {
             .function("king")?
             .encode_input(&[])?
             .into();
-        let value = U256::ZERO;
         let result = call_contract(
             &mut self.evm,
             self.contract_address,
             caller,
-            value,
+            U256::ZERO,
             Some(data),
         )?;
         let king_address = Address::from_slice(&result[12..32]);
@@ -93,6 +95,8 @@ impl Game {
 
         Ok(king_address)
     }
+
+    // pub fn last_block(&mut self, caller: Address) -> Result<>
 
     pub fn current_block(&self) -> U256 {
         U256::from(self.block)

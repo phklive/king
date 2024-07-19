@@ -11,7 +11,10 @@ use revm::{
     Evm,
 };
 
-use crate::{agent::Agent, agent::Strategy};
+use crate::{
+    agent::{Agent, Strategy},
+    constants::ETH_1,
+};
 
 // EVM
 // ================================================================================================
@@ -91,12 +94,11 @@ pub fn deploy_contract(
     bytecode: Bytes,
 ) -> Result<Address, Box<dyn std::error::Error>> {
     // Create caller
-    let balance = U256::from(10000000000000000000u64);
+    let balance = ETH_1 * U256::from(1000);
     let caller = generate_account(evm, balance);
 
     // setup tx env
-    let value = U256::from(100000000000000000u64); // 0.1 ether
-    setup_tx_env(evm, caller, value, None, Some(bytecode));
+    setup_tx_env(evm, caller, balance, None, Some(bytecode));
 
     // Execute tx
     let result = evm.transact_commit()?;
@@ -145,9 +147,9 @@ pub fn generate_agents(
     for (strategy, num) in strategies {
         for _ in 0..*num {
             let balance = match strategy {
-                Strategy::Regular => U256::from(3000000000000000000u64),
-                Strategy::Whale => U256::from(9000000000000000000u64),
-                Strategy::Degen => U256::from(10000000000000000000u64),
+                Strategy::Regular => ETH_1 * U256::from(10),
+                Strategy::Whale => ETH_1 * U256::from(100),
+                Strategy::Degen => ETH_1 * U256::from(3),
             };
             let address = generate_account(evm, balance);
             let agent = Agent::new(address, strategy.clone());

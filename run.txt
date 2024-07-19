@@ -1,0 +1,550 @@
+Agents have been generated: 2 agents created
+Current block: 0
+Current block: 1
+Created agents: Agent {
+    address: 0xf00cce970fc96752dee1bcca89dd937e1629012f,
+    strategy: Regular,
+} and Agent {
+    address: 0x42319ea2e6e3c667696557ecbbbd841ef89dd0d9,
+    strategy: Whale,
+}
+Call success
+King query by 0xF00cCe970FC96752deE1bcCA89dd937e1629012f
+King result: 0x0000000000000000000000000000000000000000
+Call success
+payed in by 0xF00cCe970FC96752deE1bcCA89dd937e1629012f
+Call success
+King query by 0xF00cCe970FC96752deE1bcCA89dd937e1629012f
+King result: 0xF00cCe970FC96752deE1bcCA89dd937e1629012f
+Call success
+payed in by 0x42319eA2e6E3C667696557ecbbbd841EF89Dd0d9
+Call success
+King query by 0x42319eA2e6E3C667696557ecbbbd841EF89Dd0d9
+King result: 0x42319eA2e6E3C667696557ecbbbd841EF89Dd0d9
+These are the two kings that went on the throne: 0x0000000000000000000000000000000000000000, 0xF00cCe970FC96752deE1bcCA89dd937e1629012f and 0x42319eA2e6E3C667696557ecbbbd841EF89Dd0d9
+Game state: Game {
+    evm: Evm {
+        evm context: EvmContext {
+            inner: InnerEvmContext {
+                env: Env {
+                    cfg: CfgEnv {
+                        chain_id: 1,
+                        kzg_settings: Default,
+                        perf_analyse_created_bytecodes: Analyse,
+                        limit_contract_code_size: None,
+                    },
+                    block: BlockEnv {
+                        number: 1,
+                        coinbase: 0x0000000000000000000000000000000000000000,
+                        timestamp: 1,
+                        gas_limit: 115792089237316195423570985008687907853269984665640564039457584007913129639935,
+                        basefee: 0,
+                        difficulty: 0,
+                        prevrandao: Some(
+                            0x0000000000000000000000000000000000000000000000000000000000000000,
+                        ),
+                        blob_excess_gas_and_price: Some(
+                            BlobExcessGasAndPrice {
+                                excess_blob_gas: 0,
+                                blob_gasprice: 1,
+                            },
+                        ),
+                    },
+                    tx: TxEnv {
+                        caller: 0x42319ea2e6e3c667696557ecbbbd841ef89dd0d9,
+                        gas_limit: 18446744073709551615,
+                        gas_price: 0,
+                        transact_to: Call(
+                            0x6105068cc47e0aaa4f0006e278ab1c6c2d4d99fc,
+                        ),
+                        value: 0,
+                        data: 0xcc181ca8,
+                        nonce: None,
+                        chain_id: None,
+                        access_list: [],
+                        gas_priority_fee: None,
+                        blob_hashes: [],
+                        max_fee_per_blob_gas: None,
+                        authorization_list: None,
+                    },
+                },
+                journaled_state: JournaledState {
+                    state: {},
+                    transient_storage: {},
+                    logs: [],
+                    depth: 0,
+                    journal: [
+                        [],
+                    ],
+                    spec: LATEST,
+                    warm_preloaded_addresses: {},
+                },
+                db: CacheDB {
+                    accounts: {
+                        0x0000000000000000000000000000000000000000: DbAccount {
+                            info: AccountInfo {
+                                balance: 0,
+                                nonce: 0,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                        0xf00cce970fc96752dee1bcca89dd937e1629012f: DbAccount {
+                            info: AccountInfo {
+                                balance: 9000000000000000000,
+                                nonce: 3,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                        0xba7abffb8127a5db2d237f5f98bbf08de1fb224b: DbAccount {
+                            info: AccountInfo {
+                                balance: 0,
+                                nonce: 1,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                        0x6105068cc47e0aaa4f0006e278ab1c6c2d4d99fc: DbAccount {
+                            info: AccountInfo {
+                                balance: 1002000000000000000000,
+                                nonce: 1,
+                                code_hash: 0xe864acf72c0ad0588b589eb8a4f7f036b69539b619ed7ec47a8683ec2b20ae7b,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x60806040526004361061004a5760003560e01c806312c8052f1461004f578063806b984f14610079578063c2052403146100b8578063cc181ca8146100c2578063fcddd056146100fa575b600080fd5b34801561005b57600080fd5b50610064610102565b60405190151581526020015b60405180910390f35b34801561008557600080fd5b506000546100a090600160a01b90046001600160601b031681565b6040516001600160601b039091168152602001610070565b6100c0610134565b005b3480156100ce57600080fd5b506000546100e2906001600160a01b031681565b6040516001600160a01b039091168152602001610070565b6100c06101dd565b600080546001600160a01b03161580159061012f5750600054600160a01b90046001600160601b03164310155b905090565b6000546001600160a01b0316331415806101535750610151610102565b155b1561017157604051636471693760e11b815260040160405180910390fd5b604051600090339047908381818185875af1925050503d80600081146101b3576040519150601f19603f3d011682016040523d82523d6000602084013e6101b8565b606091505b50509050806101da576040516312171d8360e31b815260040160405180910390fd5b50565b6101e5610102565b15610203576040516302ab8f8960e11b815260040160405180910390fd5b67016345785d8a000034101561022c57604051631e52aa2160e11b815260040160405180910390fd5b600080546001600160a01b0319163317905561026e61024c606443610296565b6000546001600160601b03600160a01b90910416808211918118919091021890565b600060146101000a8154816001600160601b0302191690836001600160601b03160217905550565b808201808211156102b757634e487b7160e01b600052601160045260246000fd5b9291505056fea264697066735822122071472c14808d8cd66241990fc8b46c39117df931232052f2f82f15f350a9ab9764736f6c634300081a0033000000000000000000000000000000000000000000000000000000000000000000,
+                                            original_len: 755,
+                                            jump_table: JumpTable {
+                                                map: "0000000000000000008400081000010220000000010000010540000004000004040000000080100000000a0000000200000000000000080100000024200000000800000000100000001000000040000000004000000080000000000000000000000000",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: StorageCleared,
+                            storage: {
+                                0: 31568813266294065960382564349426877447653132408312025,
+                            },
+                        },
+                        0x42319ea2e6e3c667696557ecbbbd841ef89dd0d9: DbAccount {
+                            info: AccountInfo {
+                                balance: 99000000000000000000,
+                                nonce: 2,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                    },
+                    contracts: {
+                        0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470: LegacyAnalyzed(
+                            LegacyAnalyzedBytecode {
+                                bytecode: 0x00,
+                                original_len: 0,
+                                jump_table: JumpTable {
+                                    map: "00",
+                                },
+                            },
+                        ),
+                        0x0000000000000000000000000000000000000000000000000000000000000000: LegacyAnalyzed(
+                            LegacyAnalyzedBytecode {
+                                bytecode: 0x00,
+                                original_len: 0,
+                                jump_table: JumpTable {
+                                    map: "00",
+                                },
+                            },
+                        ),
+                        0xe864acf72c0ad0588b589eb8a4f7f036b69539b619ed7ec47a8683ec2b20ae7b: LegacyAnalyzed(
+                            LegacyAnalyzedBytecode {
+                                bytecode: 0x60806040526004361061004a5760003560e01c806312c8052f1461004f578063806b984f14610079578063c2052403146100b8578063cc181ca8146100c2578063fcddd056146100fa575b600080fd5b34801561005b57600080fd5b50610064610102565b60405190151581526020015b60405180910390f35b34801561008557600080fd5b506000546100a090600160a01b90046001600160601b031681565b6040516001600160601b039091168152602001610070565b6100c0610134565b005b3480156100ce57600080fd5b506000546100e2906001600160a01b031681565b6040516001600160a01b039091168152602001610070565b6100c06101dd565b600080546001600160a01b03161580159061012f5750600054600160a01b90046001600160601b03164310155b905090565b6000546001600160a01b0316331415806101535750610151610102565b155b1561017157604051636471693760e11b815260040160405180910390fd5b604051600090339047908381818185875af1925050503d80600081146101b3576040519150601f19603f3d011682016040523d82523d6000602084013e6101b8565b606091505b50509050806101da576040516312171d8360e31b815260040160405180910390fd5b50565b6101e5610102565b15610203576040516302ab8f8960e11b815260040160405180910390fd5b67016345785d8a000034101561022c57604051631e52aa2160e11b815260040160405180910390fd5b600080546001600160a01b0319163317905561026e61024c606443610296565b6000546001600160601b03600160a01b90910416808211918118919091021890565b600060146101000a8154816001600160601b0302191690836001600160601b03160217905550565b808201808211156102b757634e487b7160e01b600052601160045260246000fd5b9291505056fea264697066735822122071472c14808d8cd66241990fc8b46c39117df931232052f2f82f15f350a9ab9764736f6c634300081a0033000000000000000000000000000000000000000000000000000000000000000000,
+                                original_len: 755,
+                                jump_table: JumpTable {
+                                    map: "0000000000000000008400081000010220000000010000010540000004000004040000000080100000000a0000000200000000000000080100000024200000000800000000100000001000000040000000004000000080000000000000000000000000",
+                                },
+                            },
+                        ),
+                    },
+                    logs: [],
+                    block_hashes: {},
+                    db: EmptyDB { .. },
+                },
+                error: Ok(
+                    (),
+                ),
+                valid_authorizations: [],
+            },
+            precompiles: InnerEvmContext {
+                env: Env {
+                    cfg: CfgEnv {
+                        chain_id: 1,
+                        kzg_settings: Default,
+                        perf_analyse_created_bytecodes: Analyse,
+                        limit_contract_code_size: None,
+                    },
+                    block: BlockEnv {
+                        number: 1,
+                        coinbase: 0x0000000000000000000000000000000000000000,
+                        timestamp: 1,
+                        gas_limit: 115792089237316195423570985008687907853269984665640564039457584007913129639935,
+                        basefee: 0,
+                        difficulty: 0,
+                        prevrandao: Some(
+                            0x0000000000000000000000000000000000000000000000000000000000000000,
+                        ),
+                        blob_excess_gas_and_price: Some(
+                            BlobExcessGasAndPrice {
+                                excess_blob_gas: 0,
+                                blob_gasprice: 1,
+                            },
+                        ),
+                    },
+                    tx: TxEnv {
+                        caller: 0x42319ea2e6e3c667696557ecbbbd841ef89dd0d9,
+                        gas_limit: 18446744073709551615,
+                        gas_price: 0,
+                        transact_to: Call(
+                            0x6105068cc47e0aaa4f0006e278ab1c6c2d4d99fc,
+                        ),
+                        value: 0,
+                        data: 0xcc181ca8,
+                        nonce: None,
+                        chain_id: None,
+                        access_list: [],
+                        gas_priority_fee: None,
+                        blob_hashes: [],
+                        max_fee_per_blob_gas: None,
+                        authorization_list: None,
+                    },
+                },
+                journaled_state: JournaledState {
+                    state: {},
+                    transient_storage: {},
+                    logs: [],
+                    depth: 0,
+                    journal: [
+                        [],
+                    ],
+                    spec: LATEST,
+                    warm_preloaded_addresses: {},
+                },
+                db: CacheDB {
+                    accounts: {
+                        0x0000000000000000000000000000000000000000: DbAccount {
+                            info: AccountInfo {
+                                balance: 0,
+                                nonce: 0,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                        0xf00cce970fc96752dee1bcca89dd937e1629012f: DbAccount {
+                            info: AccountInfo {
+                                balance: 9000000000000000000,
+                                nonce: 3,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                        0xba7abffb8127a5db2d237f5f98bbf08de1fb224b: DbAccount {
+                            info: AccountInfo {
+                                balance: 0,
+                                nonce: 1,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                        0x6105068cc47e0aaa4f0006e278ab1c6c2d4d99fc: DbAccount {
+                            info: AccountInfo {
+                                balance: 1002000000000000000000,
+                                nonce: 1,
+                                code_hash: 0xe864acf72c0ad0588b589eb8a4f7f036b69539b619ed7ec47a8683ec2b20ae7b,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x60806040526004361061004a5760003560e01c806312c8052f1461004f578063806b984f14610079578063c2052403146100b8578063cc181ca8146100c2578063fcddd056146100fa575b600080fd5b34801561005b57600080fd5b50610064610102565b60405190151581526020015b60405180910390f35b34801561008557600080fd5b506000546100a090600160a01b90046001600160601b031681565b6040516001600160601b039091168152602001610070565b6100c0610134565b005b3480156100ce57600080fd5b506000546100e2906001600160a01b031681565b6040516001600160a01b039091168152602001610070565b6100c06101dd565b600080546001600160a01b03161580159061012f5750600054600160a01b90046001600160601b03164310155b905090565b6000546001600160a01b0316331415806101535750610151610102565b155b1561017157604051636471693760e11b815260040160405180910390fd5b604051600090339047908381818185875af1925050503d80600081146101b3576040519150601f19603f3d011682016040523d82523d6000602084013e6101b8565b606091505b50509050806101da576040516312171d8360e31b815260040160405180910390fd5b50565b6101e5610102565b15610203576040516302ab8f8960e11b815260040160405180910390fd5b67016345785d8a000034101561022c57604051631e52aa2160e11b815260040160405180910390fd5b600080546001600160a01b0319163317905561026e61024c606443610296565b6000546001600160601b03600160a01b90910416808211918118919091021890565b600060146101000a8154816001600160601b0302191690836001600160601b03160217905550565b808201808211156102b757634e487b7160e01b600052601160045260246000fd5b9291505056fea264697066735822122071472c14808d8cd66241990fc8b46c39117df931232052f2f82f15f350a9ab9764736f6c634300081a0033000000000000000000000000000000000000000000000000000000000000000000,
+                                            original_len: 755,
+                                            jump_table: JumpTable {
+                                                map: "0000000000000000008400081000010220000000010000010540000004000004040000000080100000000a0000000200000000000000080100000024200000000800000000100000001000000040000000004000000080000000000000000000000000",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: StorageCleared,
+                            storage: {
+                                0: 31568813266294065960382564349426877447653132408312025,
+                            },
+                        },
+                        0x42319ea2e6e3c667696557ecbbbd841ef89dd0d9: DbAccount {
+                            info: AccountInfo {
+                                balance: 99000000000000000000,
+                                nonce: 2,
+                                code_hash: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+                                code: Some(
+                                    LegacyAnalyzed(
+                                        LegacyAnalyzedBytecode {
+                                            bytecode: 0x00,
+                                            original_len: 0,
+                                            jump_table: JumpTable {
+                                                map: "00",
+                                            },
+                                        },
+                                    ),
+                                ),
+                            },
+                            account_state: Touched,
+                            storage: {},
+                        },
+                    },
+                    contracts: {
+                        0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470: LegacyAnalyzed(
+                            LegacyAnalyzedBytecode {
+                                bytecode: 0x00,
+                                original_len: 0,
+                                jump_table: JumpTable {
+                                    map: "00",
+                                },
+                            },
+                        ),
+                        0x0000000000000000000000000000000000000000000000000000000000000000: LegacyAnalyzed(
+                            LegacyAnalyzedBytecode {
+                                bytecode: 0x00,
+                                original_len: 0,
+                                jump_table: JumpTable {
+                                    map: "00",
+                                },
+                            },
+                        ),
+                        0xe864acf72c0ad0588b589eb8a4f7f036b69539b619ed7ec47a8683ec2b20ae7b: LegacyAnalyzed(
+                            LegacyAnalyzedBytecode {
+                                bytecode: 0x60806040526004361061004a5760003560e01c806312c8052f1461004f578063806b984f14610079578063c2052403146100b8578063cc181ca8146100c2578063fcddd056146100fa575b600080fd5b34801561005b57600080fd5b50610064610102565b60405190151581526020015b60405180910390f35b34801561008557600080fd5b506000546100a090600160a01b90046001600160601b031681565b6040516001600160601b039091168152602001610070565b6100c0610134565b005b3480156100ce57600080fd5b506000546100e2906001600160a01b031681565b6040516001600160a01b039091168152602001610070565b6100c06101dd565b600080546001600160a01b03161580159061012f5750600054600160a01b90046001600160601b03164310155b905090565b6000546001600160a01b0316331415806101535750610151610102565b155b1561017157604051636471693760e11b815260040160405180910390fd5b604051600090339047908381818185875af1925050503d80600081146101b3576040519150601f19603f3d011682016040523d82523d6000602084013e6101b8565b606091505b50509050806101da576040516312171d8360e31b815260040160405180910390fd5b50565b6101e5610102565b15610203576040516302ab8f8960e11b815260040160405180910390fd5b67016345785d8a000034101561022c57604051631e52aa2160e11b815260040160405180910390fd5b600080546001600160a01b0319163317905561026e61024c606443610296565b6000546001600160601b03600160a01b90910416808211918118919091021890565b600060146101000a8154816001600160601b0302191690836001600160601b03160217905550565b808201808211156102b757634e487b7160e01b600052601160045260246000fd5b9291505056fea264697066735822122071472c14808d8cd66241990fc8b46c39117df931232052f2f82f15f350a9ab9764736f6c634300081a0033000000000000000000000000000000000000000000000000000000000000000000,
+                                original_len: 755,
+                                jump_table: JumpTable {
+                                    map: "0000000000000000008400081000010220000000010000010540000004000004040000000080100000000a0000000200000000000000080100000024200000000800000000100000001000000040000000004000000080000000000000000000000000",
+                                },
+                            },
+                        ),
+                    },
+                    logs: [],
+                    block_hashes: {},
+                    db: EmptyDB { .. },
+                },
+                error: Ok(
+                    (),
+                ),
+                valid_authorizations: [],
+            },
+            ..
+        },
+        ..
+    },
+    block: 1,
+    agents: [
+        Agent {
+            address: 0xf00cce970fc96752dee1bcca89dd937e1629012f,
+            strategy: Regular,
+        },
+        Agent {
+            address: 0x42319ea2e6e3c667696557ecbbbd841ef89dd0d9,
+            strategy: Whale,
+        },
+    ],
+    king: None,
+    contract_abi: Contract {
+        constructor: Some(
+            Constructor {
+                inputs: [],
+            },
+        ),
+        functions: {
+            "king": [
+                Function {
+                    name: "king",
+                    inputs: [],
+                    outputs: [
+                        Param {
+                            name: "",
+                            kind: Address,
+                            internal_type: Some(
+                                "address",
+                            ),
+                        },
+                    ],
+                    constant: None,
+                    state_mutability: View,
+                },
+            ],
+            "lastBlock": [
+                Function {
+                    name: "lastBlock",
+                    inputs: [],
+                    outputs: [
+                        Param {
+                            name: "",
+                            kind: Uint(
+                                96,
+                            ),
+                            internal_type: Some(
+                                "uint96",
+                            ),
+                        },
+                    ],
+                    constant: None,
+                    state_mutability: View,
+                },
+            ],
+            "payIn": [
+                Function {
+                    name: "payIn",
+                    inputs: [],
+                    outputs: [],
+                    constant: None,
+                    state_mutability: Payable,
+                },
+            ],
+            "payOut": [
+                Function {
+                    name: "payOut",
+                    inputs: [],
+                    outputs: [],
+                    constant: None,
+                    state_mutability: Payable,
+                },
+            ],
+            "won": [
+                Function {
+                    name: "won",
+                    inputs: [],
+                    outputs: [
+                        Param {
+                            name: "",
+                            kind: Bool,
+                            internal_type: Some(
+                                "bool",
+                            ),
+                        },
+                    ],
+                    constant: None,
+                    state_mutability: View,
+                },
+            ],
+        },
+        events: {},
+        errors: {
+            "AlreadyWon": [
+                Error {
+                    name: "AlreadyWon",
+                    inputs: [],
+                },
+            ],
+            "DidntWin": [
+                Error {
+                    name: "DidntWin",
+                    inputs: [],
+                },
+            ],
+            "TooLow": [
+                Error {
+                    name: "TooLow",
+                    inputs: [],
+                },
+            ],
+            "TransferFailed": [
+                Error {
+                    name: "TransferFailed",
+                    inputs: [],
+                },
+            ],
+        },
+        receive: false,
+        fallback: false,
+    },
+
+    contract_address: 0x6105068cc47e0aaa4f0006e278ab1c6c2d4d99fc,
+    ended: false,
+}

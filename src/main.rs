@@ -1,4 +1,5 @@
 mod agent;
+mod constants;
 mod game;
 mod utils;
 
@@ -6,16 +7,13 @@ use game::Game;
 
 use crate::agent::Strategy;
 
-const BYTECODE_PATH: &str = "contract/bytecode.txt";
-const ABI_PATH: &str = "contract/abi.json";
-
 fn main() {
     // Define agent strategies
     // Will be provided by the frontend on API call
     let strategies = vec![
-        (Strategy::Regular, 2),
-        (Strategy::Whale, 5),
-        (Strategy::Degen, 3),
+        (Strategy::Regular, 1),
+        (Strategy::Whale, 1),
+        // (Strategy::Degen, 3),
     ];
 
     // Create new Game
@@ -36,6 +34,9 @@ fn main() {
 
     println!("Created agents: {:#?} and {:#?}", agent_0, agent_1);
 
+    // check king before pay_in
+    let king = game.king(agent_0.address().clone()).unwrap();
+
     // pay_in
     let _ = game.pay_in(agent_0.address().clone()).unwrap();
 
@@ -49,7 +50,9 @@ fn main() {
     let king_1 = game.king(agent_1.address().clone()).unwrap();
 
     println!(
-        "These are the two kings that went on the throne: {} and {}",
-        king_0, king_1
+        "These are the two kings that went on the throne: {}, {} and {}",
+        king, king_0, king_1
     );
+
+    println!("Game state: {:#?}", game);
 }
