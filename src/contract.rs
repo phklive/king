@@ -2,7 +2,7 @@ use revm::primitives::{Address, Bytes, U256};
 
 use crate::{
     constants::{ETH_0, ETH_1},
-    types::EVM,
+    types::Evm,
     utils::call_contract,
 };
 
@@ -19,7 +19,7 @@ impl Contract {
 
     pub fn pay_in(
         &mut self,
-        evm: &mut EVM,
+        evm: &mut Evm,
         caller: Address,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let data = self.abi.function("payIn")?.encode_input(&[])?.into();
@@ -32,7 +32,7 @@ impl Contract {
 
     pub fn pay_out(
         &mut self,
-        evm: &mut EVM,
+        evm: &mut Evm,
         caller: Address,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let data = self.abi.function("payOut")?.encode_input(&[])?.into();
@@ -45,7 +45,7 @@ impl Contract {
 
     pub fn get_king(
         &mut self,
-        evm: &mut EVM,
+        evm: &mut Evm,
         caller: Address,
     ) -> Result<Address, Box<dyn std::error::Error>> {
         let data: Bytes = self.abi.function("king")?.encode_input(&[])?.into();
@@ -57,7 +57,7 @@ impl Contract {
 
     pub fn get_last_block(
         &mut self,
-        evm: &mut EVM,
+        evm: &mut Evm,
         caller: Address,
     ) -> Result<U256, Box<dyn std::error::Error>> {
         let data: Bytes = self.abi.function("lastBlock")?.encode_input(&[])?.into();
@@ -73,7 +73,7 @@ impl Contract {
 
     pub fn get_won(
         &mut self,
-        evm: &mut EVM,
+        evm: &mut Evm,
         caller: Address,
     ) -> Result<bool, Box<dyn std::error::Error>> {
         let data: Bytes = self.abi.function("won")?.encode_input(&[])?.into();

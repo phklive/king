@@ -1,7 +1,6 @@
 use revm::{
     db::{CacheDB, EmptyDB},
     primitives::{Account, Address, U256},
-    Evm,
 };
 
 use crate::{
@@ -9,13 +8,13 @@ use crate::{
     constants::{ABI_PATH, BYTECODE_PATH, ETH_1},
     contract::Contract,
     summary::Summary,
-    types::{Playable, Strategies, EVM},
+    types::{Evm, Playable, Strategies},
     utils::{deploy_contract, generate_account, generate_agents, read_contract},
 };
 
 #[derive(Debug)]
 pub struct Game {
-    evm: EVM,
+    evm: Evm,
     contract: Contract,
     agents: Vec<Agent>,
     ended: bool,
@@ -29,7 +28,7 @@ impl Game {
     pub fn new(strategies: Strategies) -> Self {
         // Instantiate Evm
         let cache_db = CacheDB::new(EmptyDB::default());
-        let mut evm = Evm::builder().with_db(cache_db).build();
+        let mut evm = revm::Evm::builder().with_db(cache_db).build();
 
         // Create agents
         let agents = generate_agents(&mut evm, strategies);
@@ -82,7 +81,7 @@ impl Game {
         self.agents.as_slice()
     }
 
-    // EVM
+    // Evm
     // ================================================================================================
 
     pub fn get_current_block(&self) -> U256 {

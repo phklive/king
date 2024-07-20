@@ -10,13 +10,13 @@ use revm::primitives::{
 use crate::{
     agent::Agent,
     constants::ETH_1,
-    types::{Strategies, Strategy, EVM},
+    types::{Evm, Strategies, Strategy},
 };
 
-// EVM
+// Evm
 // ================================================================================================
 
-pub fn generate_account(evm: &mut EVM, balance: U256) -> Address {
+pub fn generate_account(evm: &mut Evm, balance: U256) -> Address {
     let mut rng = rand::thread_rng();
     let mut bytes = [0u8; 20];
 
@@ -37,7 +37,7 @@ pub fn generate_account(evm: &mut EVM, balance: U256) -> Address {
 }
 
 pub fn setup_tx_env(
-    evm: &mut EVM,
+    evm: &mut Evm,
     caller: Address,
     value: U256,
     to: Option<Address>,
@@ -97,7 +97,7 @@ pub fn read_contract(
 }
 
 pub fn deploy_contract(
-    evm: &mut EVM,
+    evm: &mut Evm,
     bytecode: Bytes,
     caller: Address,
 ) -> Result<Address, Box<dyn std::error::Error>> {
@@ -121,7 +121,7 @@ pub fn deploy_contract(
 }
 
 pub fn call_contract(
-    evm: &mut EVM,
+    evm: &mut Evm,
     contract_address: Address,
     caller: Address,
     value: U256,
@@ -140,7 +140,7 @@ pub fn call_contract(
 // AGENTS
 // ================================================================================================
 
-pub fn generate_agents(evm: &mut EVM, strategies: Strategies) -> Vec<Agent> {
+pub fn generate_agents(evm: &mut Evm, strategies: Strategies) -> Vec<Agent> {
     let mut agents = Vec::new();
     for (strategy, num) in strategies.0 {
         for _ in 0..num {
