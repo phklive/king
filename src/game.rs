@@ -7,7 +7,7 @@ use revm::{
 };
 
 use crate::{
-    agent::{Agent, Strategy},
+    agent::{Agent, Playable, Strategies, Strategy},
     constants::{ABI_PATH, BYTECODE_PATH},
     contract::Contract,
     summary::Summary,
@@ -26,7 +26,7 @@ impl Game {
     // CORE
     // ================================================================================================
 
-    pub fn new(strategies: &[(Strategy, u64)]) -> Self {
+    pub fn new(strategies: Strategies) -> Self {
         // Instantiate Evm
         let cache_db = CacheDB::new(EmptyDB::default());
         let mut evm = Evm::builder().with_db(cache_db).build();
@@ -51,9 +51,15 @@ impl Game {
         }
     }
 
-    pub fn _play(&self) -> Summary {
+    pub fn play(&mut self) -> Summary {
         // play the game, update ended when one agent has won the game
-        while !self.ended {}
+        while !self.ended {
+            // loop over agents and make them play
+            for agent in &self.agents {
+                agent.play(self)
+            }
+            self.ended = true;
+        }
 
         // return summary of the game to frontend
         Summary::new(self.agents[0], 10)

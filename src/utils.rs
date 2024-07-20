@@ -12,7 +12,7 @@ use revm::{
 };
 
 use crate::{
-    agent::{Agent, Strategy},
+    agent::{Agent, Strategies, Strategy},
     constants::ETH_1,
 };
 
@@ -135,11 +135,11 @@ pub fn call_contract(
 
 pub fn generate_agents(
     evm: &mut Evm<'_, (), CacheDB<EmptyDBTyped<Infallible>>>,
-    strategies: &[(Strategy, u64)],
+    strategies: Strategies,
 ) -> Vec<Agent> {
     let mut agents = Vec::new();
     for (strategy, num) in strategies {
-        for _ in 0..*num {
+        for _ in 0..num {
             let balance = match strategy {
                 Strategy::Regular => ETH_1 * U256::from(10),
                 Strategy::Whale => ETH_1 * U256::from(100),

@@ -1,6 +1,7 @@
 use crate::agent::Agent;
 
 // Serde this struct back to the frontend
+#[derive(Debug)]
 pub struct Summary {
     king: Agent,
     times_played: u64,

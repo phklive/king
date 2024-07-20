@@ -85,6 +85,8 @@ impl Contract {
 
         let result = call_contract(evm, self.address, caller, ETH_0, Some(data))?;
 
+        println!("Get won result: {:?}", result);
+
         let array: [u8; 32] = result.as_ref().try_into().expect("Incorrect byte len");
 
         let is_won = array[31] != 0;
