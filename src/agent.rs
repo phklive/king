@@ -1,4 +1,5 @@
 use revm::primitives::Address;
+use serde::{Deserialize, Serialize};
 
 use crate::game::Game;
 
@@ -6,16 +7,17 @@ pub trait Playable {
     fn play(&self, game: &Game);
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Strategy {
     Regular,
     Whale,
     Degen,
 }
 
-pub type Strategies = Vec<(Strategy, u8)>;
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Strategies(pub Vec<(Strategy, u8)>);
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Agent {
     address: Address,
     strategy: Strategy,

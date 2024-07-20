@@ -2,24 +2,18 @@ mod agent;
 mod constants;
 mod contract;
 mod game;
+mod handlers;
 mod summary;
 mod utils;
 
-use crate::{agent::Strategy, game::Game};
+use actix_web::{App, HttpServer};
 
-fn main() {
-    // Define agent strategies, will be provided by the frontend on API call
-    let strategies = vec![
-        (Strategy::Regular, 1),
-        (Strategy::Whale, 1),
-        (Strategy::Degen, 1),
-    ];
+use crate::handlers::{health, play};
 
-    // Create new Game
-    let mut game = Game::new(strategies);
-
-    // Play the game
-    let summary = game.play();
-
-    println!("Game summary: {:?}", summary);
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| App::new().service(health).service(play))
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }

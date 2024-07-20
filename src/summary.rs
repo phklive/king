@@ -1,7 +1,9 @@
+use serde::{Deserialize, Serialize};
+
 use crate::agent::Agent;
 
 // Serde this struct back to the frontend
-#[derive(Debug)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Summary {
     king: Agent,
     times_played: u64,

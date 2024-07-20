@@ -37,7 +37,7 @@ pub fn generate_account(
     evm.context
         .evm
         .db
-        .insert_account_info(address.clone(), account_info);
+        .insert_account_info(address, account_info);
 
     address
 }
@@ -70,7 +70,7 @@ pub fn setup_tx_env(
     evm.context.evm.env.tx.gas_price = U256::ZERO;
 
     // set gas limit
-    evm.context.evm.env.tx.gas_limit = u64::max_value();
+    evm.context.evm.env.tx.gas_limit = u64::MAX;
 }
 
 // CONTRACT
@@ -83,7 +83,7 @@ pub fn read_contract(
     let bytecode = fs::read_to_string(bytecode_path)?;
     let abi_json = fs::read_to_string(abi_path)?;
 
-    let bytecode = Bytes::from_hex(&bytecode.trim())?;
+    let bytecode = Bytes::from_hex(bytecode.trim())?;
     let abi: Contract = serde_json::from_str(&abi_json)?;
 
     Ok((bytecode, abi))
@@ -92,10 +92,10 @@ pub fn read_contract(
 pub fn deploy_contract(
     evm: &mut Evm<'_, (), CacheDB<EmptyDBTyped<Infallible>>>,
     bytecode: Bytes,
+    caller: Address,
 ) -> Result<Address, Box<dyn std::error::Error>> {
-    // Create caller
+    // instantiate balance
     let balance = ETH_1 * U256::from(1000);
-    let caller = generate_account(evm, balance);
 
     // setup tx env
     setup_tx_env(evm, caller, balance, None, Some(bytecode));
@@ -138,7 +138,7 @@ pub fn generate_agents(
     strategies: Strategies,
 ) -> Vec<Agent> {
     let mut agents = Vec::new();
-    for (strategy, num) in strategies {
+    for (strategy, num) in strategies.0 {
         for _ in 0..num {
             let balance = match strategy {
                 Strategy::Regular => ETH_1 * U256::from(10),
@@ -146,7 +146,7 @@ pub fn generate_agents(
                 Strategy::Degen => ETH_1 * U256::from(3),
             };
             let address = generate_account(evm, balance);
-            let agent = Agent::new(address, strategy.clone());
+            let agent = Agent::new(address, strategy);
             agents.push(agent)
         }
     }

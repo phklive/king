@@ -7,11 +7,11 @@ use revm::{
 };
 
 use crate::{
-    agent::{Agent, Playable, Strategies, Strategy},
-    constants::{ABI_PATH, BYTECODE_PATH},
+    agent::{Agent, Playable, Strategies},
+    constants::{ABI_PATH, BYTECODE_PATH, ETH_1},
     contract::Contract,
     summary::Summary,
-    utils::{deploy_contract, generate_agents, read_contract},
+    utils::{deploy_contract, generate_account, generate_agents, read_contract},
 };
 
 #[derive(Debug)]
@@ -20,6 +20,7 @@ pub struct Game {
     contract: Contract,
     agents: Vec<Agent>,
     ended: bool,
+    master: Address,
 }
 
 impl Game {
@@ -37,8 +38,12 @@ impl Game {
         // Read contract
         let (bytecode, abi) = read_contract(BYTECODE_PATH, ABI_PATH).unwrap();
 
+        // Create game master
+        let balance = ETH_1 * U256::from(1000);
+        let master = generate_account(&mut evm, balance);
+
         // Deploy contract
-        let contract_address = deploy_contract(&mut evm, bytecode).unwrap();
+        let contract_address = deploy_contract(&mut evm, bytecode, master).unwrap();
 
         // Instantiate Contract struct
         let contract = Contract::new(abi, contract_address);
@@ -48,17 +53,29 @@ impl Game {
             contract,
             agents: agents.to_vec(),
             ended: false,
+            master,
         }
     }
 
     pub fn play(&mut self) -> Summary {
+        let mut counter = 0;
         // play the game, update ended when one agent has won the game
         while !self.ended {
+            counter += 1;
+
+            let agents = self.agents.clone();
+
             // loop over agents and make them play
-            for agent in &self.agents {
+            for agent in agents {
                 agent.play(self)
             }
-            self.ended = true;
+
+            // advance block by 1
+            self.advance_block(1);
+
+            if self.get_won(self.master).unwrap() || counter == 100000 {
+                self.ended = true;
+            }
         }
 
         // return summary of the game to frontend
