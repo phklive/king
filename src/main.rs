@@ -4,6 +4,7 @@ mod contract;
 mod game;
 mod handlers;
 mod summary;
+mod types;
 mod utils;
 
 use actix_web::{App, HttpServer};

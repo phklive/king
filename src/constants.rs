@@ -3,8 +3,8 @@ use revm::primitives::U256;
 // CONTRACT
 // ================================================================================================
 
-pub const BYTECODE_PATH: &str = "contract/bytecode.txt";
-pub const ABI_PATH: &str = "contract/abi.json";
+pub const BYTECODE_PATH: &str = "res/bytecode.txt";
+pub const ABI_PATH: &str = "res/abi.json";
 
 // CONVERSIONS
 // ================================================================================================

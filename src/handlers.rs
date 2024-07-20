@@ -1,6 +1,6 @@
 use actix_web::{get, post, web, HttpResponse, Responder, Result};
 
-use crate::{agent::Strategies, game::Game};
+use crate::{game::Game, types::Strategies};
 
 #[get("/health")]
 pub async fn health() -> impl Responder {

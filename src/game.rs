@@ -1,22 +1,21 @@
-use std::convert::Infallible;
-
 use revm::{
-    db::{CacheDB, EmptyDB, EmptyDBTyped},
-    primitives::{Address, U256},
+    db::{CacheDB, EmptyDB},
+    primitives::{Account, Address, U256},
     Evm,
 };
 
 use crate::{
-    agent::{Agent, Playable, Strategies},
+    agent::Agent,
     constants::{ABI_PATH, BYTECODE_PATH, ETH_1},
     contract::Contract,
     summary::Summary,
+    types::{Playable, Strategies, EVM},
     utils::{deploy_contract, generate_account, generate_agents, read_contract},
 };
 
 #[derive(Debug)]
 pub struct Game {
-    evm: Evm<'static, (), CacheDB<EmptyDBTyped<Infallible>>>,
+    evm: EVM,
     contract: Contract,
     agents: Vec<Agent>,
     ended: bool,
@@ -58,11 +57,8 @@ impl Game {
     }
 
     pub fn play(&mut self) -> Summary {
-        let mut counter = 0;
         // play the game, update ended when one agent has won the game
         while !self.ended {
-            counter += 1;
-
             let agents = self.agents.clone();
 
             // loop over agents and make them play
@@ -70,16 +66,16 @@ impl Game {
                 agent.play(self)
             }
 
-            // advance block by 1
-            self.advance_block(1);
-
-            if self.get_won(self.master).unwrap() || counter == 100000 {
+            if self.get_won().unwrap() {
                 self.ended = true;
             }
+
+            // open new block by advancing block by 1
+            self.advance_block(1);
         }
 
         // return summary of the game to frontend
-        Summary::new(self.agents[0], 10)
+        Summary::new(self)
     }
 
     pub fn agents(&self) -> &[Agent] {
@@ -89,12 +85,26 @@ impl Game {
     // EVM
     // ================================================================================================
 
-    pub fn current_block(&self) -> U256 {
+    pub fn get_current_block(&self) -> U256 {
         self.evm.context.evm.env.block.number
     }
 
     pub fn advance_block(&mut self, increment: u64) {
         self.evm.context.evm.env.block.number += U256::from(increment);
+    }
+
+    pub fn get_account_balance(&mut self, address: Address) -> U256 {
+        let account = self.get_account(address);
+        account.info.balance
+    }
+
+    pub fn get_account_nonce(&mut self, address: Address) -> u64 {
+        let account = self.get_account(address);
+        account.info.nonce
+    }
+
+    fn get_account(&mut self, address: Address) -> &Account {
+        self.evm.context.evm.load_account(address).unwrap().0
     }
 
     // CONTRACT
@@ -108,15 +118,15 @@ impl Game {
         self.contract.pay_out(&mut self.evm, caller)
     }
 
-    pub fn get_king(&mut self, caller: Address) -> Result<Address, Box<dyn std::error::Error>> {
-        self.contract.get_king(&mut self.evm, caller)
+    pub fn get_king(&mut self) -> Result<Address, Box<dyn std::error::Error>> {
+        self.contract.get_king(&mut self.evm, self.master)
     }
 
-    pub fn get_last_block(&mut self, caller: Address) -> Result<U256, Box<dyn std::error::Error>> {
-        self.contract.get_last_block(&mut self.evm, caller)
+    pub fn get_last_block(&mut self) -> Result<U256, Box<dyn std::error::Error>> {
+        self.contract.get_last_block(&mut self.evm, self.master)
     }
 
-    pub fn get_won(&mut self, caller: Address) -> Result<bool, Box<dyn std::error::Error>> {
-        self.contract.get_won(&mut self.evm, caller)
+    pub fn get_won(&mut self) -> Result<bool, Box<dyn std::error::Error>> {
+        self.contract.get_won(&mut self.evm, self.master)
     }
 }

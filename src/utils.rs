@@ -1,28 +1,22 @@
-use std::{convert::Infallible, fs};
+use std::fs;
 
 use ethabi::Contract;
 use rand::Rng;
-use revm::{
-    db::{CacheDB, EmptyDBTyped},
-    primitives::{
-        hex::FromHex, AccountInfo, Address, Bytecode, Bytes, ExecutionResult, Output, TxKind,
-        KECCAK_EMPTY, U256,
-    },
-    Evm,
+use revm::primitives::{
+    hex::FromHex, AccountInfo, Address, Bytecode, Bytes, ExecutionResult, Output, TxKind,
+    KECCAK_EMPTY, U256,
 };
 
 use crate::{
-    agent::{Agent, Strategies, Strategy},
+    agent::Agent,
     constants::ETH_1,
+    types::{Strategies, Strategy, EVM},
 };
 
 // EVM
 // ================================================================================================
 
-pub fn generate_account(
-    evm: &mut Evm<'_, (), CacheDB<EmptyDBTyped<Infallible>>>,
-    balance: U256,
-) -> Address {
+pub fn generate_account(evm: &mut EVM, balance: U256) -> Address {
     let mut rng = rand::thread_rng();
     let mut bytes = [0u8; 20];
 
@@ -43,7 +37,7 @@ pub fn generate_account(
 }
 
 pub fn setup_tx_env(
-    evm: &mut Evm<'_, (), CacheDB<EmptyDBTyped<Infallible>>>,
+    evm: &mut EVM,
     caller: Address,
     value: U256,
     to: Option<Address>,
@@ -73,6 +67,19 @@ pub fn setup_tx_env(
     evm.context.evm.env.tx.gas_limit = u64::MAX;
 }
 
+pub fn wei_to_eth_u64(wei: U256) -> u64 {
+    // 1 ETH = 10^18 wei
+    let eth_in_wei = U256::from(10).pow(U256::from(18));
+
+    // Perform the division
+    let eth = wei / eth_in_wei;
+
+    // Convert to u64, saturating at u64::MAX if the value is too large
+    let eth: u64 = eth.try_into().unwrap_or(u64::MAX);
+
+    eth
+}
+
 // CONTRACT
 // ================================================================================================
 
@@ -90,7 +97,7 @@ pub fn read_contract(
 }
 
 pub fn deploy_contract(
-    evm: &mut Evm<'_, (), CacheDB<EmptyDBTyped<Infallible>>>,
+    evm: &mut EVM,
     bytecode: Bytes,
     caller: Address,
 ) -> Result<Address, Box<dyn std::error::Error>> {
@@ -114,7 +121,7 @@ pub fn deploy_contract(
 }
 
 pub fn call_contract(
-    evm: &mut Evm<'static, (), CacheDB<EmptyDBTyped<Infallible>>>,
+    evm: &mut EVM,
     contract_address: Address,
     caller: Address,
     value: U256,
@@ -133,10 +140,7 @@ pub fn call_contract(
 // AGENTS
 // ================================================================================================
 
-pub fn generate_agents(
-    evm: &mut Evm<'_, (), CacheDB<EmptyDBTyped<Infallible>>>,
-    strategies: Strategies,
-) -> Vec<Agent> {
+pub fn generate_agents(evm: &mut EVM, strategies: Strategies) -> Vec<Agent> {
     let mut agents = Vec::new();
     for (strategy, num) in strategies.0 {
         for _ in 0..num {
