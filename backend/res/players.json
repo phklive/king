@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Analyst 📊",
+    "image": "analyst.png",
+    "lore": "Analyst is your average crypto right curve, an expert in the world of blockchain.",
+    "stats": {
+      "balance": 30,
+      "playstyle": "strategic"
+    }
+  },
+  {
+    "name": "Degen 🤪",
+    "image": "degen.png",
+    "lore": "Degen lives for the thrill of high-risk, high-reward situations in the crypto space.",
+    "stats": {
+      "balance": 10,
+      "playstyle": "random"
+    }
+  },
+  {
+    "name": "Whale 💰",
+    "image": "whale.png",
+    "lore": "Whale is a seasoned investor with deep pockets, known for making big moves.",
+    "stats": {
+      "balance": 50,
+      "playstyle": "regular"
+    }
+  }
+]

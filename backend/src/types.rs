@@ -1,4 +1,4 @@
-use std::convert::Infallible;
+use std::{convert::Infallible, fmt::Display};
 
 use revm::db::{CacheDB, EmptyDBTyped};
 use serde::{Deserialize, Serialize};
@@ -13,9 +13,19 @@ pub type Evm = revm::Evm<'static, (), CacheDB<EmptyDBTyped<Infallible>>>;
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Strategy {
-    Regular,
+    Analyst,
     Whale,
     Degen,
+}
+
+impl Display for Strategy {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Strategy::Analyst => write!(f, "Analyst"),
+            Strategy::Degen => write!(f, "Degen"),
+            Strategy::Whale => write!(f, "Whale"),
+        }
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize)]

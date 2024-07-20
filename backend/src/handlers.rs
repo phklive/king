@@ -1,6 +1,7 @@
 use std::fs;
 
 use actix_web::{get, post, web, HttpResponse, Responder, Result};
+use log::info;
 
 use crate::{
     constants::PLAYERS_PATH,
@@ -31,6 +32,8 @@ pub async fn play(strategies: web::Json<Strategies>) -> Result<impl Responder> {
 
     // Play the game
     let summary = game.play();
+
+    info!("Game summary: {}", summary);
 
     Ok(web::Json(summary))
 }

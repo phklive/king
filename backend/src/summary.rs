@@ -1,6 +1,8 @@
+use std::fmt::Display;
+
 use serde::{Deserialize, Serialize};
 
-use crate::{agent::Agent, game::Game, utils::wei_to_eth_u64};
+use crate::{agent::Agent, game::Game};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Summary {
@@ -24,16 +26,13 @@ impl Summary {
             .to_owned();
 
         // Get last block
-        let block: u64 = game.get_current_block().try_into().unwrap();
-        println!("block: {:?}", block);
+        let block = game.get_current_block();
 
         // Get balance of winner
-        let balance = wei_to_eth_u64(game.get_account_balance(king_address));
-        println!("balance: {:?}", balance);
+        let balance = game.get_account_balance(king_address);
 
         // Decrement by 1 for the last `pay_out` call
         let times_played = game.get_account_nonce(king_address);
-        println!("times_played: {:?}", times_played);
 
         Self {
             king,
@@ -41,5 +40,19 @@ impl Summary {
             block,
             balance,
         }
+    }
+}
+
+impl Display for Summary {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "Summary:\n\
+             King: {:?}\n\
+             Times Played: {}\n\
+             Block: {}\n\
+             Balance: {}",
+            self.king, self.times_played, self.block, self.balance
+        )
     }
 }

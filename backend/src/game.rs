@@ -1,3 +1,6 @@
+use log::info;
+use rand::prelude::SliceRandom;
+use rand::thread_rng;
 use revm::{
     db::{CacheDB, EmptyDB},
     primitives::{Account, Address, U256},
@@ -9,7 +12,7 @@ use crate::{
     contract::Contract,
     summary::Summary,
     types::{Evm, Playable, Strategies},
-    utils::{deploy_contract, generate_account, generate_agents, read_contract},
+    utils::{deploy_contract, generate_account, generate_agents, read_contract, wei_to_eth_u64},
 };
 
 #[derive(Debug)]
@@ -57,8 +60,18 @@ impl Game {
 
     pub fn play(&mut self) -> Summary {
         // play the game, update ended when one agent has won the game
+
+        info!(
+            "Game has started! {} agents are playing.",
+            self.agents.len()
+        );
+
         while !self.ended {
-            let agents = self.agents.clone();
+            let mut agents = self.agents.clone();
+
+            // Shuffle the agents
+            let mut rng = thread_rng();
+            agents.shuffle(&mut rng);
 
             // loop over agents and make them play
             for agent in agents {
@@ -67,6 +80,7 @@ impl Game {
 
             if self.get_won().unwrap() {
                 self.ended = true;
+                info!("Game has ended! An agent has been crowned King!")
             }
 
             // open new block by advancing block by 1
@@ -84,17 +98,17 @@ impl Game {
     // Evm
     // ================================================================================================
 
-    pub fn get_current_block(&self) -> U256 {
-        self.evm.context.evm.env.block.number
+    pub fn get_current_block(&self) -> u64 {
+        self.evm.context.evm.env.block.number.try_into().unwrap()
     }
 
     pub fn advance_block(&mut self, increment: u64) {
         self.evm.context.evm.env.block.number += U256::from(increment);
     }
 
-    pub fn get_account_balance(&mut self, address: Address) -> U256 {
+    pub fn get_account_balance(&mut self, address: Address) -> u64 {
         let account = self.get_account(address);
-        account.info.balance
+        wei_to_eth_u64(account.info.balance)
     }
 
     pub fn get_account_nonce(&mut self, address: Address) -> u64 {
@@ -121,7 +135,7 @@ impl Game {
         self.contract.get_king(&mut self.evm, self.master)
     }
 
-    pub fn get_last_block(&mut self) -> Result<U256, Box<dyn std::error::Error>> {
+    pub fn get_last_block(&mut self) -> Result<u64, Box<dyn std::error::Error>> {
         self.contract.get_last_block(&mut self.evm, self.master)
     }
 

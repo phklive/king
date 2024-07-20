@@ -59,7 +59,7 @@ impl Contract {
         &mut self,
         evm: &mut Evm,
         caller: Address,
-    ) -> Result<U256, Box<dyn std::error::Error>> {
+    ) -> Result<u64, Box<dyn std::error::Error>> {
         let data: Bytes = self.abi.function("lastBlock")?.encode_input(&[])?.into();
 
         let result = call_contract(evm, self.address, caller, ETH_0, Some(data))?;
@@ -67,6 +67,8 @@ impl Contract {
         let array: [u8; 32] = result.as_ref().try_into().expect("Incorrect byte len");
 
         let last_block = U256::from_be_bytes(array);
+
+        let last_block: u64 = last_block.try_into().unwrap();
 
         Ok(last_block)
     }
