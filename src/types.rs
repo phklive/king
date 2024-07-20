@@ -20,3 +20,21 @@ pub enum Strategy {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Strategies(pub Vec<(Strategy, u8)>);
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Players(Vec<Player>);
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Player {
+    name: String,
+    image: String,
+    lore: String,
+    stats: PlayerStats,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PlayerStats {
+    balance: u64,
+    #[serde(rename = "playstyle")]
+    play_style: String,
+}

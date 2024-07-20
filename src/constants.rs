@@ -6,6 +6,11 @@ use revm::primitives::U256;
 pub const BYTECODE_PATH: &str = "res/bytecode.txt";
 pub const ABI_PATH: &str = "res/abi.json";
 
+// PLAYERS
+// ================================================================================================
+
+pub const PLAYERS_PATH: &str = "res/players.json";
+
 // CONVERSIONS
 // ================================================================================================
 
