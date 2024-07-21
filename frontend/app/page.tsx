@@ -4,6 +4,8 @@ import PlayerCard from "./components/player";
 import { FinalSummary, Player } from "./types";
 import Summary from "./components/summary";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
 export default function Home() {
   const [players, setPlayers] = useState<Player[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch("http://localhost:8080/players");
+        const response = await fetch(API_URL);
         if (!response.ok) {
           throw new Error("Failed to fetch players");
         }
