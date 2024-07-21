@@ -1,3 +1,4 @@
+use rayon::prelude::*;
 use std::fs;
 
 use actix_web::{error::ErrorBadRequest, get, post, web, HttpResponse, Responder, Result};
@@ -6,7 +7,7 @@ use log::info;
 use crate::{
     constants::PLAYERS_PATH,
     game::Game,
-    summary::FinalSummary,
+    summary::{FinalSummary, Summary},
     types::{Players, Strategies},
 };
 
@@ -42,30 +43,24 @@ pub async fn play(req: web::Json<(Strategies, u64)>) -> Result<impl Responder> {
         return Err(ErrorBadRequest("Too many simulation runs."));
     }
 
-    let mut summaries = Vec::new();
-
     info!(
         "Game has started! {} agents are playing {} times.",
         num_strategies, times
     );
 
-    for i in 0..times {
-        // Create new Game
-        let mut game = Game::new(strategies.clone());
-
-        // Play the game
-        info!("Playing iteration: {}", i);
-        let summary = game.play();
-
-        summaries.push(summary);
-    }
+    let summaries: Vec<Summary> = (0..times)
+        .into_par_iter()
+        .map(|i| {
+            info!("Playing iteration: {}", i);
+            let mut game = Game::new(strategies.clone());
+            game.play()
+        })
+        .collect();
 
     let final_summary = FinalSummary::new(summaries);
-
     info!(
         "Game has ended a new King has been crowned:\n {}",
         final_summary
     );
-
     Ok(web::Json(final_summary))
 }
