@@ -48,26 +48,22 @@ impl Playable for Agent {
 
         match self.strategy() {
             Strategy::Analyst => {
-                // // Analyst only plays 1 block before game ends
-                // if game.get_current_block() == game.get_last_block().unwrap() - 1 {
-                //     game.pay_in(self.address).unwrap()
-                // }
-
-                game.pay_in(self.address).unwrap()
+                // Analyst only plays 1 block before game ends
+                if game.get_current_block() == game.get_last_block().unwrap() - 1 {
+                    game.pay_in(self.address).unwrap()
+                }
             }
             Strategy::Whale => {
                 // Whale plays all the time
                 game.pay_in(self.address).unwrap()
             }
             Strategy::Degen => {
-                // // Degen plays half of the time
-                // let rand = rand::thread_rng().gen_range(0..100);
-                //
-                // if rand % 2 == 0 {
-                //     game.pay_in(self.address).unwrap()
-                // }
+                // Degen plays half of the time
+                let rand = rand::thread_rng().gen_range(0..100);
 
-                game.pay_in(self.address).unwrap()
+                if rand % 2 == 0 {
+                    game.pay_in(self.address).unwrap()
+                }
             }
         }
     }

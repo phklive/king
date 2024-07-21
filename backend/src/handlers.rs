@@ -35,7 +35,7 @@ pub async fn play(strategies: web::Json<Strategies>) -> Result<impl Responder> {
         return Err(ErrorBadRequest("Too few agents to start simulation."));
     }
 
-    let times = 100;
+    let times = 10;
 
     let mut summaries = Vec::new();
 
