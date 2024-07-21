@@ -99,8 +99,8 @@ export default function Home() {
         github
       </a>
       <p className="my-10 text-center md:text-lg font-bold">
-        Welcome to "King of the Ether 👑" a real-time game play-out simulation,
-        under the hood a Rust backend spins up a{" "}
+        Welcome to &quot;King of the Ether 👑&quot; a real-time game play-out
+        simulation, under the hood a Rust backend spins up a{" "}
         <a
           href="https://github.com/bluealloy/revm"
           className="hover:text-blue-500 underline"
