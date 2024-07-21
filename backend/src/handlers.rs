@@ -39,7 +39,7 @@ pub async fn play(req: web::Json<(Strategies, u64)>) -> Result<impl Responder> {
         return Err(ErrorBadRequest("Too few agents to start simulation."));
     }
 
-    if times < 1 || times > 1000 {
+    if times < 1 || times > 100 {
         return Err(ErrorBadRequest("Too many simulation runs."));
     }
 

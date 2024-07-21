@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   const incorrectRunTimes = () => {
-    return times < 1 || times > 1000;
+    return times < 1 || times > 100;
   };
 
   const handleSubmit = async () => {
@@ -128,12 +128,12 @@ export default function Home() {
         ))}
       </div>
       <div className="flex flex-col items-center justify-between bg-black my-10 p-8 border border-black rounded-xl shadow-black shadow-2xl">
-        <label htmlFor="times">Pick number of simulation runs (1-1000):</label>
+        <label htmlFor="times">Pick number of simulation runs (1-100):</label>
         <input
           id="times"
           type="number"
           min="1"
-          max="1000"
+          max="100"
           value={times}
           onChange={(e) => setTimes(+e.target.value)}
           className="self-center text-center text-black rounded mt-4"
