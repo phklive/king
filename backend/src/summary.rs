@@ -157,8 +157,12 @@ impl StrategySummary {
             strategy,
             wins,
             average_block: if wins > 0 { block / wins } else { 0 },
-            average_balance: if wins > 0 { balance / wins } else { 0 },
-            average_times_played: if wins > 0 { times_played / wins } else { 0 },
+            average_balance: if wins > 0 { balance / wins } else { balance },
+            average_times_played: if wins > 0 {
+                times_played / wins
+            } else {
+                times_played
+            },
         }
     }
 }

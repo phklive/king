@@ -14,6 +14,7 @@ export default function Home() {
   );
   const [summary, setSummary] = useState<FinalSummary | null>(null);
   const [king, setKing] = useState("");
+  const [times, setTimes] = useState(1);
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -54,8 +55,7 @@ export default function Home() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    const formattedData = Object.entries(playerValues);
-    console.log(formattedData);
+    const formattedData = [Object.entries(playerValues), times];
 
     try {
       const response = await fetch("http://localhost:8080/play", {
@@ -126,6 +126,18 @@ export default function Home() {
             onChange={handlePlayerValueChange}
           />
         ))}
+      </div>
+      <div className="flex flex-col items-center justify-between bg-black mt-10 p-8 border border-black rounded-xl shadow-black shadow-2xl">
+        <label htmlFor="times">Pick number of simulation runs (1-1000):</label>
+        <input
+          id="times"
+          type="number"
+          min="1"
+          max="1000"
+          value={times}
+          onChange={(e) => setTimes(+e.target.value)}
+          className="self-center text-center text-black rounded mt-4"
+        />
       </div>
       <button
         onClick={handleSubmit}

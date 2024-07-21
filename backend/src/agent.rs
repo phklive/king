@@ -1,4 +1,3 @@
-use log::info;
 use rand::Rng;
 use revm::primitives::Address;
 use serde::{Deserialize, Serialize};
