@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import PlayerCard from "./components/player";
-import { Player } from "./types";
+import { FinalSummary, Player } from "./types";
 import Summary from "./components/summary";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   const [playerValues, setPlayerValues] = useState<{ [key: string]: number }>(
     {},
   );
-  const [summary, setSummary] = useState("");
+  const [summary, setSummary] = useState<FinalSummary | null>(null);
   const [king, setKing] = useState("");
 
   useEffect(() => {
@@ -71,15 +71,11 @@ export default function Home() {
       }
 
       const result = await response.json();
-
-      // const king = result.king.strategy;
-      // setKing(king);
-
-      const res = JSON.stringify(result);
       console.log("Game started successfully:", result);
-      setSummary(res);
+      setSummary(result as FinalSummary);
     } catch (error) {
       console.error("Error starting the game:", error);
+      setError("Failed to start the game. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -143,7 +139,9 @@ export default function Home() {
         {isSubmitting ? "Loading..." : "Start"}
         <p>(2 agents minimum)</p>
       </button>
-      <Summary text={summary} />
+      {summary && <Summary data={summary} />}
     </main>
   );
 }
+
+// <Summary text={summary} />
