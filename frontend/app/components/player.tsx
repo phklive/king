@@ -38,7 +38,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         <img
           src={`/images/${image}`}
           alt={`${name}'s image`}
-          className="w-full h-[600px] mb-4 rounded-lg"
+          className="w-full h-[600px] mb-4"
         />
       )}
       <p className="m-8 text-center">{lore}</p>

@@ -28,6 +28,9 @@ pub async fn play(req: web::Json<(Strategies, u64)>) -> Result<impl Responder> {
     // Receive strategies from client
     let strategies: Strategies = req.0 .0;
 
+    // Receive times from client
+    let times: u64 = req.0 .1;
+
     // Prevent play if 0 or 1 agent
     let num_strategies: u8 = strategies.0.iter().fold(0, |acc, (_, num)| acc + num);
 
@@ -35,7 +38,9 @@ pub async fn play(req: web::Json<(Strategies, u64)>) -> Result<impl Responder> {
         return Err(ErrorBadRequest("Too few agents to start simulation."));
     }
 
-    let times: u64 = req.0 .1;
+    if times < 1 || times > 1000 {
+        return Err(ErrorBadRequest("Too many simulation runs."));
+    }
 
     let mut summaries = Vec::new();
 

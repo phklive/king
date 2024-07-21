@@ -53,6 +53,10 @@ export default function Home() {
     );
   };
 
+  const incorrectRunTimes = () => {
+    return times < 1 || times > 1000;
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     const formattedData = [Object.entries(playerValues), times];
@@ -97,7 +101,7 @@ export default function Home() {
       >
         github
       </a>
-      <p className="my-10 text-center text-lg font-bold">
+      <p className="my-10 text-center md:text-lg font-bold">
         Welcome to "King of the Ether 👑" a real-time game play-out simulation.
         Under the hood a Rust backend spins up a{" "}
         <a
@@ -116,7 +120,7 @@ export default function Home() {
         within, creates agents with different characteristics / strategies and
         executes the simulation until a new king is crowned 👑
       </p>
-      <div className="flex flex-wrap justify-center gap-10">
+      <div className="flex flex-col md:flex-row justify-center gap-10">
         {players.map((player, index) => (
           <PlayerCard
             key={index}
@@ -141,17 +145,17 @@ export default function Home() {
       </div>
       <button
         onClick={handleSubmit}
-        disabled={tooFewPlayers() || isSubmitting}
-        className={`my-10 font-bold py-2 px-4 rounded w-1/4 h-16 ${
-          tooFewPlayers() || isSubmitting
+        disabled={tooFewPlayers() || isSubmitting || incorrectRunTimes()}
+        className={`my-10 font-bold py-2 px-4 rounded h-16 ${
+          tooFewPlayers() || isSubmitting || incorrectRunTimes()
             ? "bg-gray-500 cursor-not-allowed"
             : "bg-black hover:bg-blue-700"
         }`}
       >
-        {isSubmitting ? "Loading..." : "Start"}
+        {isSubmitting ? "Loading..." : "Simulate"}
         <p>(2 agents minimum)</p>
       </button>
-      {summary && <Summary data={summary} />}
+      {summary && <Summary data={summary} times={times} />}
     </main>
   );
 }
