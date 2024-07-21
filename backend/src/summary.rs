@@ -32,7 +32,7 @@ impl Summary {
         let balance = game.get_account_balance(king_address);
 
         // Decrement by 1 for the last `pay_out` call
-        let times_played = game.get_account_nonce(king_address);
+        let times_played = game.get_account_nonce(king_address) - 1;
 
         Self {
             king,

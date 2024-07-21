@@ -3,13 +3,13 @@ use revm::primitives::U256;
 // CONTRACT
 // ================================================================================================
 
-pub const BYTECODE_PATH: &str = "res/bytecode.txt";
-pub const ABI_PATH: &str = "res/abi.json";
+pub const BYTECODE_PATH: &str = "static/bytecode.txt";
+pub const ABI_PATH: &str = "static/abi.json";
 
 // PLAYERS
 // ================================================================================================
 
-pub const PLAYERS_PATH: &str = "res/players.json";
+pub const PLAYERS_PATH: &str = "static/players.json";
 
 // CONVERSIONS
 // ================================================================================================
