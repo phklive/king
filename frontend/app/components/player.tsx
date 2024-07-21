@@ -38,15 +38,15 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         <img
           src={`/images/${image}`}
           alt={`${name}'s image`}
-          className="w-full h-[600px] mb-4"
+          className="w-full h-[600px]"
         />
       )}
-      <p className="m-8 text-center">{lore}</p>
+      <p className="my-8 text-center">{lore}</p>
       <div className="text-center mb-4">
         <p>{stats.balance} Ether</p>
         <p>{stats.playstyle} play-style</p>
       </div>
-      <div className="w-full px-4">
+      <div className="w-full px-4 mt-auto">
         <div className="flex items-center justify-between">
           <label htmlFor={`${name}-input`}>Pick number of agents (0-10):</label>
           <input

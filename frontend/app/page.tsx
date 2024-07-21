@@ -93,7 +93,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-4 sm:px-8 md:px-16 lg:px-40 py-10">
+    <main className="flex min-h-screen flex-col items-center sm:px-8 px-10 md:px-40 py-10">
       <h1 className="text-3xl">King of the Ether 👑</h1>
       <a
         href="https://github.com/phklive/king"
@@ -131,7 +131,7 @@ export default function Home() {
           />
         ))}
       </div>
-      <div className="flex flex-col items-center justify-between bg-black mt-10 p-8 border border-black rounded-xl shadow-black shadow-2xl">
+      <div className="flex flex-col items-center justify-between bg-black my-10 p-8 border border-black rounded-xl shadow-black shadow-2xl">
         <label htmlFor="times">Pick number of simulation runs (1-1000):</label>
         <input
           id="times"
@@ -142,22 +142,20 @@ export default function Home() {
           onChange={(e) => setTimes(+e.target.value)}
           className="self-center text-center text-black rounded mt-4"
         />
+        <button
+          onClick={handleSubmit}
+          disabled={tooFewPlayers() || isSubmitting || incorrectRunTimes()}
+          className={`mt-4 font-bold py-2 px-4 rounded h-16 bg-white text-black ${
+            tooFewPlayers() || isSubmitting || incorrectRunTimes()
+              ? "bg-gray-500 cursor-not-allowed"
+              : "bg-black hover:bg-blue-700"
+          }`}
+        >
+          {isSubmitting ? "Loading..." : "Simulate"}
+          <p>(2 agents minimum)</p>
+        </button>
       </div>
-      <button
-        onClick={handleSubmit}
-        disabled={tooFewPlayers() || isSubmitting || incorrectRunTimes()}
-        className={`my-10 font-bold py-2 px-4 rounded h-16 ${
-          tooFewPlayers() || isSubmitting || incorrectRunTimes()
-            ? "bg-gray-500 cursor-not-allowed"
-            : "bg-black hover:bg-blue-700"
-        }`}
-      >
-        {isSubmitting ? "Loading..." : "Simulate"}
-        <p>(2 agents minimum)</p>
-      </button>
       {summary && <Summary data={summary} times={times} />}
     </main>
   );
 }
-
-// <Summary text={summary} />
