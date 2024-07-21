@@ -3,7 +3,7 @@ FRONTEND_DIR = ./frontend
 
 start-frontend:
 	@echo "Starting frontend..."
-	@cd $(FRONTEND_DIR) && npm run dev
+	@cd $(FRONTEND_DIR) && npm run build && npm run start
 
 start-backend:
 	@echo "Starting backend..."
