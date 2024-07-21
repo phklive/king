@@ -11,7 +11,7 @@ pub trait Playable {
 
 pub type Evm = revm::Evm<'static, (), CacheDB<EmptyDBTyped<Infallible>>>;
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 pub enum Strategy {
     Analyst,
     Whale,
@@ -28,7 +28,7 @@ impl Display for Strategy {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Strategies(pub Vec<(Strategy, u8)>);
 
 #[derive(Debug, Serialize, Deserialize)]

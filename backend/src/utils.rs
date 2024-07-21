@@ -145,9 +145,9 @@ pub fn generate_agents(evm: &mut Evm, strategies: Strategies) -> Vec<Agent> {
     for (strategy, num) in strategies.0 {
         for _ in 0..num {
             let balance = match strategy {
-                Strategy::Analyst => ETH_1 * U256::from(30),
+                Strategy::Analyst => ETH_1 * U256::from(50),
                 Strategy::Whale => ETH_1 * U256::from(50),
-                Strategy::Degen => ETH_1 * U256::from(10),
+                Strategy::Degen => ETH_1 * U256::from(50),
             };
             let address = generate_account(evm, balance);
             let agent = Agent::new(address, strategy);

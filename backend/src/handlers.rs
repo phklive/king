@@ -6,6 +6,7 @@ use log::info;
 use crate::{
     constants::PLAYERS_PATH,
     game::Game,
+    summary::FinalSummary,
     types::{Players, Strategies},
 };
 
@@ -34,13 +35,29 @@ pub async fn play(strategies: web::Json<Strategies>) -> Result<impl Responder> {
         return Err(ErrorBadRequest("Too few agents to start simulation."));
     }
 
-    // Create new Game
-    let mut game = Game::new(strategies);
+    let times = 100;
 
-    // Play the game
-    let summary = game.play();
+    let mut summaries = Vec::new();
 
-    info!("Game summary: {}", summary);
+    info!("Game has started! {} agents are playing.", num_strategies);
 
-    Ok(web::Json(summary))
+    for i in 0..times {
+        // Create new Game
+        let mut game = Game::new(strategies.clone());
+
+        // Play the game
+        info!("Playing iteration: {}", i);
+        let summary = game.play();
+
+        summaries.push(summary);
+    }
+
+    let final_summary = FinalSummary::new(summaries);
+
+    info!(
+        "Game has ended a new King has been crowned:\n {}",
+        final_summary
+    );
+
+    Ok(web::Json(final_summary))
 }

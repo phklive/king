@@ -1,4 +1,3 @@
-use log::info;
 use rand::prelude::SliceRandom;
 use rand::thread_rng;
 use revm::{
@@ -60,12 +59,6 @@ impl Game {
 
     pub fn play(&mut self) -> Summary {
         // play the game, update ended when one agent has won the game
-
-        info!(
-            "Game has started! {} agents are playing.",
-            self.agents.len()
-        );
-
         while !self.ended {
             let mut agents = self.agents.clone();
 
@@ -80,14 +73,12 @@ impl Game {
 
             if self.get_won().unwrap() {
                 self.ended = true;
-                info!("Game has ended! An agent has been crowned King!")
             }
 
             // open new block by advancing block by 1
             self.advance_block(1);
         }
 
-        // return summary of the game to frontend
         Summary::new(self)
     }
 
