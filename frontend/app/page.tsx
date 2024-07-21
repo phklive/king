@@ -13,7 +13,6 @@ export default function Home() {
     {},
   );
   const [summary, setSummary] = useState<FinalSummary | null>(null);
-  const [king, setKing] = useState("");
   const [times, setTimes] = useState(1);
 
   useEffect(() => {
@@ -75,10 +74,8 @@ export default function Home() {
       }
 
       const result = await response.json();
-      console.log("Game started successfully:", result);
       setSummary(result as FinalSummary);
     } catch (error) {
-      console.error("Error starting the game:", error);
       setError("Failed to start the game. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -102,15 +99,15 @@ export default function Home() {
         github
       </a>
       <p className="my-10 text-center md:text-lg font-bold">
-        Welcome to "King of the Ether 👑" a real-time game play-out simulation.
-        Under the hood a Rust backend spins up a{" "}
+        Welcome to "King of the Ether 👑" a real-time game play-out simulation,
+        under the hood a Rust backend spins up a{" "}
         <a
           href="https://github.com/bluealloy/revm"
           className="hover:text-blue-500 underline"
         >
           Revm
         </a>{" "}
-        instance deploys the game{" "}
+        instance, deploys the game{" "}
         <a
           href="https://github.com/phklive/King/blob/main/backend/static/king.sol"
           className="hover:text-blue-500 underline"
@@ -125,7 +122,6 @@ export default function Home() {
           <PlayerCard
             key={index}
             {...player}
-            winner={king == player.name}
             value={playerValues[player.name] || 0}
             onChange={handlePlayerValueChange}
           />
@@ -147,7 +143,7 @@ export default function Home() {
           disabled={tooFewPlayers() || isSubmitting || incorrectRunTimes()}
           className={`mt-4 font-bold py-2 px-4 rounded h-16 bg-white text-black ${
             tooFewPlayers() || isSubmitting || incorrectRunTimes()
-              ? "bg-gray-500 cursor-not-allowed"
+              ? "bg-gray-600 cursor-not-allowed"
               : "bg-black hover:bg-blue-700"
           }`}
         >

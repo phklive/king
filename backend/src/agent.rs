@@ -58,7 +58,7 @@ impl Playable for Agent {
             }
             Strategy::Degen => {
                 // Degen plays half of the time
-                let rand = rand::thread_rng().gen_range(0..100);
+                let rand = rand::thread_rng().gen_range(0..10);
 
                 if rand % 2 == 0 {
                     game.pay_in(self.address).unwrap()

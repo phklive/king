@@ -4,7 +4,6 @@ import { Player } from "../types";
 interface PlayerCardProps extends Player {
   value: number;
   onChange: (name: string, newValue: number) => void;
-  winner: boolean;
 }
 
 const PlayerCard: React.FC<PlayerCardProps> = ({
@@ -13,7 +12,6 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   lore,
   stats,
   value,
-  winner,
   onChange,
 }) => {
   const getEmoji = (name: string) => {
@@ -29,7 +27,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 
   return (
     <div
-      className={`flex flex-col items-center flex-1 rounded border border-black bg-black ${winner && "shadow-2xl shadow-black border-yellow-400"} max-w-sm py-3`}
+      className={`flex flex-col items-center flex-1 rounded border border-black bg-black max-w-sm py-3`}
     >
       <h1 className="text-2xl rounded-xl mb-4">
         {name} {getEmoji(name)}
