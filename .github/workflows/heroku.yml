@@ -15,10 +15,6 @@ jobs:
         run: mkdir app
       - name: copy
         run: mv ./target/release/king ./app/king
-
-  deploy:
-    name: Heroku deployment
-    steps:
       - uses: akhileshns/heroku-deploy@v3.13.15
         with:
           # key from repository secrets
