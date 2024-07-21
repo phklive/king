@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Build app
-        run: cargo build --release
+        run: cd backend && cargo build --release
       - name: make dir
         run: mkdir app
       - name: copy
-        run: mv ./target/release/king ./app/king
+        run: mv ./backend/target/release/king ./app/king
       - uses: akhileshns/heroku-deploy@v3.13.15
         with:
           # key from repository secrets
