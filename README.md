@@ -7,7 +7,7 @@ Inspired by Paradigm's question:
 
 > "An Ethereum contract is funded with 1,000 ETH. It costs 1 ETH to call, which is added to the balance. If the contract isn't called for 10 blocks, the last caller gets the entire ETH balance. How might this game unfold and end?"
 
-This project simulates the game in real-time, using a Rust-based environment to model different agents and strategies within the context of the Ethereum Virtual Machine ([Revm]()).
+This project simulates the game in real-time, using a Rust-based environment to model different agents and strategies within the context of the Ethereum Virtual Machine ([Revm](https://github.com/bluealloy/revm)).
 
 ## Structure
 
@@ -18,7 +18,7 @@ The repository is divided into two main components:
 
 ### Backend
 
-- Reads and deploys the compiled [King.sol](./backend/static/King.sol) contract
+- Reads and deploys the compiled [King.sol](./backend/static/king.sol) contract
 - Uses Revm to instantiate an EVM environment
 - Runs an [actix-web](https://actix.rs/) server to handle frontend requests
 - Executes simulations with specified agents and rounds
@@ -32,20 +32,22 @@ The repository is divided into two main components:
 
 ## Setup
 
-1. Clone the repository:
+1. Make sure that you have `rust, npm / yarn and next installed`
+
+2. Clone the repository:
 
 ```shell
 git clone https://github.com/phklive/king
 
 ```
 
-1. Start the Rust server:
+3. Start the Rust server:
 
 ```shell
 make start-backend
 ```
 
-2. Start the Next.js frontend:
+4. Start the Next.js frontend:
 
 ```shell
 make start-frontend
