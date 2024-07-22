@@ -1,6 +1,6 @@
 # King of the Ether 👑
 
-[Live website]()
+[Live website](https://king-zeta.vercel.app/) (Better on desktop 💻)
 
 _"An Ethereum contract is funded with 1,000 ETH. It costs 1 ETH to call, which is added to the balance. If the contract isn't called for 10 blocks, the last caller gets the entire ETH balance. How might this game unfold and end? Describe your thinking." Paradigm_
 
