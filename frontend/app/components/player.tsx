@@ -45,7 +45,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         <p>{stats.playstyle} play-style</p>
       </div>
       <div className="w-full px-4 mt-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row items-center justify-between">
           <label htmlFor={`${name}-input`}>Pick number of agents (0-10):</label>
           <input
             type="number"
