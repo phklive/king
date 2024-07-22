@@ -1,28 +1,38 @@
 # King of the Ether 👑
 
-[Live website](https://king-zeta.vercel.app/) (Better on desktop 💻)
+[![Live Website](https://img.shields.io/badge/Live-Website-blue)](https://king-zeta.vercel.app/)
+[![Better on Desktop](https://img.shields.io/badge/Better%20on-Desktop-green)]()
 
-_"An Ethereum contract is funded with 1,000 ETH. It costs 1 ETH to call, which is added to the balance. If the contract isn't called for 10 blocks, the last caller gets the entire ETH balance. How might this game unfold and end? Describe your thinking." Paradigm_
+Inspired by Paradigm's question:
 
-_"Let's not only think... Let's simulate it!" Paul-Henry_
+> "An Ethereum contract is funded with 1,000 ETH. It costs 1 ETH to call, which is added to the balance. If the contract isn't called for 10 blocks, the last caller gets the entire ETH balance. How might this game unfold and end?"
 
-Rust based real-time simulation environment for the "game" specified in the question enabling the accurate modeling of different agents and game play-out in the context of the Ethereum Virtual Machine ([Revm]()).
+This project simulates the game in real-time, using a Rust-based environment to model different agents and strategies within the context of the Ethereum Virtual Machine ([Revm]()).
 
 ## Structure
 
-The code of this repository is separated in 2 main folders a Rust based [backend](./backend/) and React / Typescript based [frontend](./frontend/):
+The repository is divided into two main components:
+
+1. [Backend](./backend/): Rust-based simulation engine
+2. [Frontend](./frontend/): React/TypeScript-based user interface
 
 ### Backend
 
-The compiled [King.sol](./backend/static/King.sol) is read, a Revm instance is instantiated on which the smart contract is deployed. An [actix-web]() server awaits requests from the frontend containing certain agents with their number and how many rounds of the simulation must be ran. On successful request from the frontend the simulation is executed n number of times using specified generated agents. Finally a summary of run averages is generated and served back to the frontend for display.
+- Reads and deploys the compiled [King.sol](./backend/static/King.sol) contract
+- Uses Revm to instantiate an EVM environment
+- Runs an [actix-web](https://actix.rs/) server to handle frontend requests
+- Executes simulations with specified agents and rounds
+- Generates and serves summary statistics
 
 ### Frontend
 
-The frontend is a [Next.js](https://nextjs.org/) website capable of representing the different agents, select the number of playing agents and rounds played, display the winner and a comprehensive summary of the overall simulation using graphs.
+- Built with [Next.js](https://nextjs.org/)
+- Allows users to select agents, number of players, and simulation rounds
+- Displays winner and comprehensive simulation summary using graphs
 
 ## Setup
 
-1. Clone the repo:
+1. Clone the repository:
 
 ```shell
 git clone https://github.com/phklive/king
@@ -41,25 +51,54 @@ make start-backend
 make start-frontend
 ```
 
-## Notes
+## Extensibility
 
-### Extensibility
+This project serves as a framework for EVM "King of the Ether" simulations:
 
-This repo can serve as a framewok for Evm "King of the ether" simulations:
-
-- Simple addition of new agents and characteristics
-- Implementation of arbitrarly complex agent strategies
+- Easy addition of new agents and characteristics
+- Implementation of arbitrarily complex agent strategies
 - Flexible number of simulation runs
-- Programmable Evm transaction context
+- Programmable EVM transaction context
 
-In the case where this game would be concretely deployed on a blockchain this repo could be used to model and simulation, different scenarios enabling convergence towards a game optimal strategy.
+For real-world blockchain deployments, this framework could be used to model various scenarios and help determine concrete optimal game strategies.
 
-### Agents, strategies & insights
+## Agents, Strategies & Insights
 
-We could think about other agents and strategies:
+The current implementation features basic agents with simple strategies. However, there is room for improvement in agent complexity and strategy granularity. Here are some potential enhancements:
 
-- Gaz guzzler
-- Validator
+### Proposed New Agents
 
-if same strategies => time game => winner = one with the most funds
-if diff strategies => capital efficiency game => winner = one with the most capital efficient strategy
+1. **Validator**
+
+   - Ability to censor incoming transactions attempting to claim the throne
+   - Limited censorship power (e.g., can only censor once every X blocks)
+   - Introduces an element of transaction control to the game
+
+2. **Gas Guzzler**
+
+   - Can fill an entire block with their own transactions
+   - Limited to one-time use per game (is costly)
+   - Adds a dimension of block space competition
+
+### Strategy Refinements
+
+- Develop coalition-forming capabilities among agents
+- Create adaptive strategies that evolve based on other agents behaviors
+
+### Game Dynamics Insights
+
+Based on current simulations, two primary game dynamics emerge:
+
+1. **Homogeneous Strategies**
+
+   - When all agents employ similar strategies, the game becomes a war of attrition
+   - The agent with the largest capital pool typically emerges victorious
+   - Game outcome is largely determined by initial resource distribution
+
+2. **Heterogeneous Strategies**
+
+   - With diverse agent strategies, capital efficiency becomes the key to success
+   - Clever tactics can outperform raw financial power
+   - The game shifts from a simple endurance test to a complex strategic challenge
+
+By enhancing agent complexity and strategy diversity, we can create a more nuanced and realistic simulation of on-chain game theory dynamics.
