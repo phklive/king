@@ -32,7 +32,7 @@ The repository is divided into two main components:
 
 ## Setup
 
-1. Make sure that you have `rust, npm / yarn and next installed`
+1. Make sure that you have `rust`, `npm` and `next` installed
 
 2. Clone the repository:
 
