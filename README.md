@@ -1,8 +1,5 @@
 # King of the Ether 👑
 
-[![Live Website](https://img.shields.io/badge/Live-Website-blue)](https://king-zeta.vercel.app/)
-[![Better on Desktop](https://img.shields.io/badge/Better%20on-Desktop-green)]()
-
 Inspired by Paradigm's question:
 
 > "An Ethereum contract is funded with 1,000 ETH. It costs 1 ETH to call, which is added to the balance. If the contract isn't called for 10 blocks, the last caller gets the entire ETH balance. How might this game unfold and end?"
